@@ -1,2 +1,3 @@
-# local-deps
-Local dependencies
+# Local dependencies
+
+Change .env data

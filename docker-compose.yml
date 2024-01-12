@@ -1,0 +1,46 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: cubiko-db
+    image: postgres:16.0
+    env_file: .env
+    volumes:
+      - './postgres_data:/var/lib/postgresql/data'
+    networks:
+      custom_network:
+        ipv4_address: $IP_DB
+
+  pgadmin:
+    container_name: cubiko-pgadmin
+    image: dpage/pgadmin4
+    env_file: .env
+    ports:
+      - '5050:80'
+    networks:
+      custom_network:
+        ipv4_address: $IP_PGADMIN
+
+  gateway:
+    container_name: cubiko-gateway
+    image: nginx:1.25
+    restart: unless-stopped
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./cert:/etc/letsencrypt/live/server
+    ports:
+      - '80:80'
+      - '443:443'
+    command: '/bin/sh -c ''while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'''
+    networks:
+      custom_network:
+        ipv4_address: $IP_NGINX
+
+networks:
+  custom_network:
+    name: cubiko
+    external: true
+
+volumes:
+  .:
+  static:
