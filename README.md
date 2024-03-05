@@ -2,7 +2,7 @@
 
 Configuration for development on a local machine focused on the autonomous management of each of the microprojects.
 
-## Funcionamiento
+## Functioning
 
 Provides the containers necessary for its autonomous operation, which correspond to:
 
