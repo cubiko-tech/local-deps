@@ -1,6 +1,6 @@
 # Local dependencies
 
-Configuration for development on a local machine focused on the autonomous management of each of the microprojects.
+Configuration for development on a local machine focused on the autonomous management of each of the micro-projects.
 
 ## Functioning
 
